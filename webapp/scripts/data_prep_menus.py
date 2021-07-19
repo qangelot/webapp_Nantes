@@ -5,7 +5,7 @@ from datetime import datetime
 import plotly.graph_objs as go
 import plotly.colors
 
-from scripts.data_load import load_dataset
+from webapp.scripts.data_load import load_dataset
 
 
 def menus_figures(canteen, start_date, end_date):
@@ -19,7 +19,7 @@ def menus_figures(canteen, start_date, end_date):
   start_date = datetime.strptime(start_date , '%d/%m/%Y').strftime("%Y-%m-%d")
   end_date = datetime.strptime(end_date , '%d/%m/%Y').strftime("%Y-%m-%d")
 
-  data = load_dataset(file_name="./data/frequentation_dtwh.db")
+  data = load_dataset(file_name="webapp/data/frequentation_dtwh.db")
   data["date"] = pd.to_datetime(data["date"], format="%Y-%m-%d")
   data.sort_values("date", inplace=True)
 

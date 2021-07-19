@@ -1,22 +1,29 @@
-from canteen_bi import app
+from flask import current_app as app
 import json, plotly
 import pandas as pd
-from flask import render_template, request, Response, jsonify
-from scripts.data_prep_freq import freq_figures
-from scripts.data_prep_menus import menus_figures
-from scripts.data_prep_tempo import tempo_figures
-from scripts.data_prep_geo import geo_figures
+from flask import url_for, redirect, render_template, \
+request, make_response, Blueprint
+from ..scripts.data_prep_freq import freq_figures
+from ..scripts.data_prep_menus import menus_figures
+from ..scripts.data_prep_tempo import tempo_figures
+from ..scripts.data_prep_geo import geo_figures
+
+from ..forms import ContactForm
+from ..scripts.data_load import load_dataset
 
 
-from scripts.data_load import load_dataset
-
-
-data = load_dataset(file_name="./data/frequentation_dtwh.db")
+data = load_dataset(file_name="webapp/data/frequentation_dtwh.db")
 data["date"] = pd.to_datetime(data["date"], format="%Y-%m-%d")
 data.sort_values("date", inplace=True)
 
-@app.route('/', methods=['POST', 'GET'])
-@app.route('/freq', methods=['POST', 'GET'])
+
+# Blueprint Configuration
+bi_bp = Blueprint(
+    "bi_bp", __name__, template_folder="templates", static_folder="static"
+)
+
+
+@bi_bp.route('/freq', methods=['POST', 'GET'])
 def freq():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()
@@ -44,7 +51,8 @@ def freq():
                             selected_canteen=selected_canteen
                             )
 
-@app.route('/menus', methods=['POST', 'GET'])
+
+@bi_bp.route('/menus', methods=['POST', 'GET'])
 def menus():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()
@@ -73,7 +81,7 @@ def menus():
                             )
 
 
-@app.route('/tempo', methods=['POST', 'GET'])
+@bi_bp.route('/tempo', methods=['POST', 'GET'])
 def tempo():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()
@@ -102,7 +110,7 @@ def tempo():
                             )
 
 
-@app.route('/geo', methods=['POST', 'GET'])
+@bi_bp.route('/geo', methods=['POST', 'GET'])
 def geo():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()

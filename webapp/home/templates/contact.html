@@ -1,0 +1,42 @@
+
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ super() }}
+
+{% endblock %}
+
+{% block content %}
+
+{% include "nav.html" %}
+
+
+<div class="form-wrapper">
+    <h2 class="title">Contact</h2>
+    <p> Faites de cet outil le vôtre : indiquez ici toutes les améliorations 
+        auxquelles vous aspirez afin de rentre cette application la plus pertinente possible ! </p>
+
+    <form method="POST" action="{{ url_for('contact') }}">
+
+        <fieldset class="form-field">
+            {{ form.name.label }}
+            {{ form.name(size=20) }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.email.label }}
+            {{ form.email }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.body.label }}
+            {{ form.body }}
+        </fieldset>
+
+        {{ form.submit }}
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ super() }}
+
+{% endblock %}
+
+{% block content %}
+
+{% include "nav.html" %}
+
+
+<div class="container-fluid">
+	<!--chart descriptions-->
+
+	<div class="card mt-5" style="width: 100%;">
+		<div class="card-body">
+		<h2 class="card-title text-center">Opti Canteen permet un suivi à 360 degrés de l'activité des cantines nantaises</h2>
+		<p class="card-text text-center"> En se basant sur l'historique de données à disposition et les retours des équipes sur le terrain, 
+            cet outil doit permettre de résoudre les problématiques de gaspillage alimentaire et d'approvisionement auxquelles les personnels sont confrontés. 
+            Pour ce faire, Opti Canteen mêle analyses descriptive, prédictive et prescriptive.</p>
+	    </div>
+	<div class="sep"><hr/></div>
+    </div>	
+
+    <div class="form-wrapper">
+
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert">
+            x
+          </button>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <h1>Se connecter</h1>
+
+    <form method="POST" action="/login">
+      {{ form.csrf_token }}
+
+      <fieldset class="email">
+        {{ form.email.label }}
+        {{ form.email(placeholder='email@example.com') }}
+        {% if form.email.errors %}
+          <ul class="errors">
+            {% for error in form.email.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+      <fieldset class="password">
+        {{ form.password.label }}
+        {{ form.password }}
+        {% if form.email.errors %}
+          <ul class="errors">
+            {% for error in form.password.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+      <div class="submit-button">
+        {{ form.submit }}
+      </div>
+
+      <div class="login-signup">
+        <span>Créer un compte</span>
+        <a href="{{ url_for('home_bp.signup') }}">Sign up.</a>
+      </div>
+
+    </form>
+  </div>
+</div>    
+
+{% endblock %}

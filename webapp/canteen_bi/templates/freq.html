@@ -1,0 +1,135 @@
+
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ super() }}
+
+{% endblock %}
+
+{% block content %}
+
+{% include "nav_bi.html" %}
+
+
+<div class="container-fluid">
+	<!--chart descriptions-->
+
+	<div class="card mt-5" style="width: 100%;">
+		<div class="card-body">
+		<h2 class="card-title text-center">Tableau de suivi de l'activité des cantines nantaises</h2>
+		<p class="card-text text-center">Analyse des facteurs de la fréquentation des cantines de la métropole
+			Nantaise au regard des prévisions réalisées par les agents depuis 2010.</p>
+	</div>
+	<div class="sep"><hr/></div>
+
+	<!--selectors-->	
+	<div class="container mt-3">
+	<!--cantine-->	
+
+	<form class="px-4 py-3" role="form" method="post" action="{{ url_for('bi_bp.freq') }}" id="form-filter">
+
+	<div class="row">
+
+		<div class="col-lg-3 col-md-6 col-xs-12 mt-3">
+
+		<div class="dropdown">
+			<button class="btn btn-muted btn-lg dropdown-toggle" type="button" 
+			id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
+			aria-expanded="false">Filtrer par cantine</button>
+			
+			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="check-boxes">
+			<div class="form-check ml-3">
+					<select name="cantines">
+					{% for cantine in cantines %}
+						<option value="{{cantine}}" id="{{cantine}}" >{{cantine}}</option>
+					{% endfor %}
+					</select>
+					<br>
+			</div>
+		</div>
+		</div>
+	</div>
+
+		<!--dates-->	
+		<div class="col-lg-3 col-md-6 col-xs-12 mt-2">
+
+			<div class="form-group"> <!-- Date input -->
+			<label class="control-label" for="start_date">Date de début</label>
+			<input class="form-control" id="start_date" name="start_date" placeholder="DD/MM//YYY" type="text"/>
+			</div>
+		</div>
+
+		<div class="col-md-3 col-sm-6 col-xs-12 mt-2">
+
+			<div class="form-group"> <!-- Date input -->
+			<label class="control-label" for="end_date">Date de fin</label>
+			<input class="form-control" id="end_date" name="end_date" placeholder="DD/MM//YYY" type="text"/>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-xs-12 mt-4">
+			<div class="form-group"> <!-- Submit button -->
+			<button class="btn btn-primary " name="submit" type="submit">Submit</button>
+			</div>
+		</div>
+
+	</div>    
+	</form>
+	</div>
+	</div>
+</div>		
+
+<!--charts-->		
+<div id="charts" class="container-fluid mt-5 text-center">
+
+		<div class="container">
+			<h4 style="text-align: center;">Données de fréquentation de la cantine {{ selected_canteen }}</h4>
+		</div>
+
+	<div class="row mt-3 mb-2">
+		<div class="col-lg-6 col-md-12">
+			<div class="card shadow-sm rounded">
+					<div id="{{ids[0]}}"></div>
+			</div>	
+		</div>
+		<div class="col-lg-6 col-md-12">
+			<div class="card">
+					<div id="{{ids[1]}}"></div>
+			</div>	
+		</div>
+	</div>
+
+		<div class="container mt-5">
+			<h4 style="text-align: center;">Décomposition de la série temporelle globale</h4>
+		</div>
+
+	<div class="row mt-3 mb-3">
+		<div class="col-lg-6 col-md-12">
+			<div class="card">
+					<div id="{{ids[2]}}"></div>
+			</div>	
+		</div>
+		<div class="col-lg-6 col-md-12">
+			<div class="card">
+					<div id="{{ids[3]}}"></div>
+			</div>	
+		</div>
+	</div>
+	<div class="row mt-3 mb-3">
+		<div class="col-lg-6 col-md-12">
+			<div class="card">
+					<div id="{{ids[4]}}"></div>
+			</div>	
+		</div>
+		<div class="col-lg-6 col-md-12">
+			<div class="card">
+					<div id="{{ids[5]}}"></div>
+			</div>	
+		</div>
+			
+	</div>
+
+</div>
+
+{% endblock %}

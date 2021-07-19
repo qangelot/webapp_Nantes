@@ -8,7 +8,7 @@ import plotly.colors
 import statsmodels.api as sm
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
-from scripts.data_load import load_dataset
+from webapp.scripts.data_load import load_dataset
 
 
 def tempo_figures(canteen, start_date, end_date):
@@ -22,7 +22,7 @@ def tempo_figures(canteen, start_date, end_date):
   start_date = datetime.strptime(start_date , '%d/%m/%Y').strftime("%Y-%m-%d")
   end_date = datetime.strptime(end_date , '%d/%m/%Y').strftime("%Y-%m-%d")
 
-  conn = sql.connect('./data/frequentation_dtwh.db')
+  conn = sql.connect('webapp/data/frequentation_dtwh.db')
 
   SQL_Query = pd.read_sql_query(
     '''select 

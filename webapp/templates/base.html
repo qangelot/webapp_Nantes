@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+	<title>Opti Cantines</title>
+	<link rel="shortcut icon" type = 'image/x-icon' href="../static/img/favicon.ico">
+	<style>
+	.card {box-shadow: 0 0 10px rgba(85, 83, 83, 0.623);
+			margin-top: 20px; margin-bottom: 20px;}
+	.sep {
+		width:75%;
+		margin:0 auto;
+		text-align: center;
+	}
+	.jumbotron{
+		height: 5vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #EEEEEE !important;
+	}
+	span {
+		font-size: 1.5rem;
+		color: ivory;
+	}
+	.link-nav {
+		font-size: 1.2rem;
+		color: ivory;
+	}
+	</style>
+	<!--import script files needed fro plotly and bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	{% endblock %}
+</head>
+
+<body style="background-color: #EEEEEE ;">
+
+	<div id="content">{% block content %}{% endblock %}</div>
+
+</body>
+
+<footer>
+	{% block footer %}
+	<div class="logo-and-copyright text-center mt-4">
+		<div class="logo-container">
+		<a href="https://metropole.nantes.fr/"  target="_blank" style="display:block">
+		<img alt="Nantes" class="ufb-logo" src="../static/img/nantes_nobg.png" width="100" height="80">
+		</a>
+		</div>
+		<div class="copyright-container udlite-text-xs mt-2 mb-3">
+		© 2021
+		</div>
+	</div>
+    <script type="text/javascript">
+    	// plots the figure by id using Plotly
+    	// id must match the div id above in the html
+    	var figures = {{figuresJSON | safe}};
+		var ids = {{ids | safe}};
+		for(var i in figures) {
+			Plotly.plot(ids[i],
+				figures[i].data,
+				figures[i].layout || {});
+		};
+
+		// checks or unchecks the filter boxes based on the select all box
+        $("#select-all-check").change(function () {
+        	$("#check-boxes input:checkbox").prop('checked', $(this).prop('checked'));
+        });
+
+		// uncheck select-all box when unchecking another box
+		$("#form-filter").change(function () {
+			if (!$(this).prop('checked')) {
+				$("#select-all-check").prop('checked', false);
+			}
+		});
+
+		// check select-all box when re-checking all of the other boxes
+		$("#form-filter").change(function () {
+			if ($(".country-check:checked").length == $('.form-check').length - 1) {
+				$("#select-all-check").prop('checked', true);
+			}
+		});
+    </script>
+	{% endblock %}
+</footer>
+
+</html>
