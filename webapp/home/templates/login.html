@@ -1,0 +1,92 @@
+
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ super() }}
+
+<style>
+.card{
+	text-align:center;
+	margin: 0 auto;
+	width: 75%;
+}
+.carousel {
+	text-align:center;
+	height: 75%;
+	width: 75%;
+	margin: 50px auto;
+}
+.carousel-inner .item img {
+	min-width: 100%;
+	width: 100%;
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+{% include "nav.html" %}
+
+
+<div class="container-fluid">
+	<!--chart descriptions-->
+
+	<div class="card mt-5" >
+		<div class="card-body">
+		<h2 class="card-title text-center">Opti Canteen permet un suivi à 360 degrés de l'activité des cantines nantaises</h2>
+		<p class="card-text text-center"> En se basant sur l'historique de données à disposition et les retours des équipes sur le terrain, 
+            cet outil doit permettre de résoudre les problématiques de gaspillage alimentaire et d'approvisionement auxquelles les personnels sont confrontés. 
+            Pour ce faire, Opti Canteen mêle analyses descriptive, prédictive et prescriptive.</p>
+        </div>
+	<div class="sep"><hr/></div>
+    </div>	
+
+	<div id="carouselNav" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+		  <li data-target="#carouselNav" data-slide-to="0" class="active"></li>
+		  <li data-target="#carouselNav" data-slide-to="1"></li>
+		  <li data-target="#carouselNav" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" style="border-radius: 5px; box-shadow: 0 0 10px rgba(85, 83, 83, 0.623);">
+		  <div class="carousel-item active">
+			<a href="{{ url_for('bi_bp.freq') }}">
+			<img class="d-block w-100" src="{{ url_for('static', filename='img/bi.jpg') }}" alt="bi app page">
+			<div class="carousel-caption">
+				<h2>Opti Canteen BI</h2>
+			</div>
+			</a>
+		</div>
+		  <div class="carousel-item">
+			<a href="{{ url_for('predict_bp.predict') }}">
+			<img class="d-block w-100" src="{{ url_for('static', filename='img/ia.jpg') }}" alt="ia app page">
+			<div class="carousel-caption">
+				<h2>Opti Canteen Predict</h2>
+			</div>
+			</a>
+		</div>
+		  <div class="carousel-item">
+			<a href="{{ url_for('home_bp.contact') }}">
+			<img class="d-block w-100" src="{{ url_for('static', filename='img/contact.jpg') }}" alt="contact page">
+			<div class="carousel-caption">
+				<h2>Boîte à idées</h2>
+			</div>
+		</a>
+		</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselNav" role="button" data-slide="prev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="sr-only">Précédent</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselNav" role="button" data-slide="next">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="sr-only">Suivant</span>
+		</a>
+	</div>
+
+
+</div>    
+
+{% endblock %}

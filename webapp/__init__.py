@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_mail import Mail
 
 
 # Globally accessible libraries
 db = SQLAlchemy()
+maill = Mail()
 login_manager = LoginManager()
 
 def create_app():
@@ -13,8 +15,9 @@ def create_app():
     app.config.from_object('config.DevConfig')
 
     # Initialize Plugins
-    # db.init_app(app)
-    #  login_manager.init_app(app)
+    db.init_app(app)
+    maill.init_app(app)
+    login_manager.init_app(app)
 
     with app.app_context():
         # Include our Routes
@@ -29,6 +32,6 @@ def create_app():
         app.register_blueprint(routes.home_bp)
 
         # Create Database Models
-        # db.create_all()
+        db.create_all()
 
         return app

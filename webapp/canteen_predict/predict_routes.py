@@ -2,6 +2,7 @@ from flask import current_app as app
 import pandas as pd
 from flask import url_for, redirect, render_template, \
 request, make_response, Blueprint
+from flask_login import login_required
 
 
 # Blueprint Configuration
@@ -11,10 +12,12 @@ predict_bp = Blueprint(
 
 
 @predict_bp.route('/predict', methods=['POST', 'GET'])
-def home():
+@login_required
+def predict():
     pass
 
 
 @predict_bp.route('/analysis', methods=['POST', 'GET'])
-def canteen_bi():
+@login_required
+def analysis():
     pass

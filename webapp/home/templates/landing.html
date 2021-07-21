@@ -5,6 +5,36 @@
 
 {{ super() }}
 
+<style>
+  .card{
+			text-align:center;
+			margin: 0 auto;
+			width: 75%;
+		}
+	.form-wrapper {
+    text-align:center;
+		width: 400px;
+    margin: 50px auto;
+	}
+    .form-wrapper form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .form-wrapper h2 {
+        margin: 0 0 15px;
+    }
+    fieldset, .submit-button {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .submit-button {   
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -15,17 +45,17 @@
 <div class="container-fluid">
 	<!--chart descriptions-->
 
-	<div class="card mt-5" style="width: 100%;">
+	<div class="card mt-5">
 		<div class="card-body">
 		<h2 class="card-title text-center">Opti Canteen permet un suivi à 360 degrés de l'activité des cantines nantaises</h2>
 		<p class="card-text text-center"> En se basant sur l'historique de données à disposition et les retours des équipes sur le terrain, 
             cet outil doit permettre de résoudre les problématiques de gaspillage alimentaire et d'approvisionement auxquelles les personnels sont confrontés. 
             Pour ce faire, Opti Canteen mêle analyses descriptive, prédictive et prescriptive.</p>
-	    </div>
-	<div class="sep"><hr/></div>
-    </div>	
+            <p class="card-text text-center">N'hesitez pas à vous rendre dans la partie Contact afin de nous faire par de vos idées!</p>
+    </div>
+  </div>	
 
-    <div class="form-wrapper">
+<div class="form-wrapper">
 
     {% for message in get_flashed_messages() %}
       <div class="alert alert-warning">
@@ -39,13 +69,14 @@
       </div>
     {% endfor %}
 
-    <h1>Se connecter</h1>
-
-    <form method="POST" action="/login">
+    <form method="POST" action="/">
       {{ form.csrf_token }}
+      
+      <h2>Se connecter</h2>
 
       <fieldset class="email">
-        {{ form.email.label }}
+        {{ form.email.label }} :
+        <br>
         {{ form.email(placeholder='email@example.com') }}
         {% if form.email.errors %}
           <ul class="errors">
@@ -54,9 +85,10 @@
           </ul>
         {% endif %}
       </fieldset>
-
+      <br>
       <fieldset class="password">
-        {{ form.password.label }}
+        {{ form.password.label }} :
+        <br>
         {{ form.password }}
         {% if form.email.errors %}
           <ul class="errors">
@@ -65,14 +97,15 @@
           </ul>
         {% endif %}
       </fieldset>
-
+      <br>
+      <br>
       <div class="submit-button">
         {{ form.submit }}
       </div>
-
       <div class="login-signup">
-        <span>Créer un compte</span>
-        <a href="{{ url_for('home_bp.signup') }}">Sign up.</a>
+        <p>Créer un compte : 
+        <a href="{{ url_for('home_bp.signup') }}">S'inscrire.</a>
+        </p>
       </div>
 
     </form>

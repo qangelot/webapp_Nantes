@@ -5,6 +5,40 @@
 
 {{ super() }}
 
+<style>
+    .card{
+			text-align:center;
+			margin: 0 auto;
+			width: 75%;
+		}
+	.form-wrapper {
+    text-align:center;
+		width: 400px;
+    	margin: 50px auto;
+	}
+    .form-wrapper form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .form-wrapper h2 {
+        margin: 0 0 15px;
+    }
+    fieldset, .submit-button {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .submit-button {   
+        font-size: 15px;
+        font-weight: bold;
+    }
+    #larger {
+    height: 175px;
+    width: 325px;
+    }
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -13,28 +47,66 @@
 
 
 <div class="form-wrapper">
-    <h2 class="title">Contact</h2>
-    <p> Faites de cet outil le vôtre : indiquez ici toutes les améliorations 
-        auxquelles vous aspirez afin de rentre cette application la plus pertinente possible ! </p>
 
-    <form method="POST" action="{{ url_for('contact') }}">
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert">
+          x
+        </button>
+        {{ message }}
+      </div>
+    {% endfor %}
 
+    <form method="POST" action="/contact">
+        {{ form.csrf_token }}
+
+        <h2 class="title">Contact</h2>
+        <p> Faites de cet outil le vôtre : indiquez ici les améliorations 
+            auxquelles vous aspirez afin que cette application la plus pertinente possible! </p>
+        <br>
         <fieldset class="form-field">
-            {{ form.name.label }}
-            {{ form.name(size=20) }}
+            {{ form.name.label }} :
+            <br>
+            {{ form.name(placeholder='Eric Dupond') }}
+            {% if form.name.errors %}
+                <ul class="errors">
+                    {% for error in form.name.errors %}
+                        <li>{{ error }}</li>{% endfor %}
+                </ul>
+            {% endif %}
         </fieldset>
-
+        <br>
         <fieldset class="form-field">
-            {{ form.email.label }}
-            {{ form.email }}
+            {{ form.email.label }} :
+            <br>
+            {{ form.email(placeholder='email@example.com') }}
+            {% if form.email.errors %}
+                <ul class="errors">
+                    {% for error in form.email.errors %}
+                        <li>{{ error }}</li>{% endfor %}
+                </ul>
+            {% endif %}
         </fieldset>
-
+        <br>
         <fieldset class="form-field">
-            {{ form.body.label }}
-            {{ form.body }}
+            {{ form.body.label }} :
+            <br>
+            {{ form.body(id='larger') }}
+            {% if form.body.errors %}
+                <ul class="errors">
+                    {% for error in form.body.errors %}
+                    <li>{{ error }}</li>{% endfor %}
+                </ul>
+            {% endif %}
         </fieldset>
-
-        {{ form.submit }}
+        <br>
+        <br>
+        <div class="submit-button">
+            {{ form.submit }}
+        </div>
 
     </form>
 </div>

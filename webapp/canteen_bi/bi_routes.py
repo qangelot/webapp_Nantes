@@ -3,19 +3,19 @@ import json, plotly
 import pandas as pd
 from flask import url_for, redirect, render_template, \
 request, make_response, Blueprint
+from flask_login import login_required
+
 from ..scripts.data_prep_freq import freq_figures
 from ..scripts.data_prep_menus import menus_figures
 from ..scripts.data_prep_tempo import tempo_figures
 from ..scripts.data_prep_geo import geo_figures
 
-from ..forms import ContactForm
 from ..scripts.data_load import load_dataset
 
 
 data = load_dataset(file_name="webapp/data/frequentation_dtwh.db")
 data["date"] = pd.to_datetime(data["date"], format="%Y-%m-%d")
 data.sort_values("date", inplace=True)
-
 
 # Blueprint Configuration
 bi_bp = Blueprint(
@@ -24,6 +24,7 @@ bi_bp = Blueprint(
 
 
 @bi_bp.route('/freq', methods=['POST', 'GET'])
+@login_required
 def freq():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()
@@ -53,6 +54,7 @@ def freq():
 
 
 @bi_bp.route('/menus', methods=['POST', 'GET'])
+@login_required
 def menus():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()
@@ -82,6 +84,7 @@ def menus():
 
 
 @bi_bp.route('/tempo', methods=['POST', 'GET'])
+@login_required
 def tempo():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()
@@ -111,6 +114,7 @@ def tempo():
 
 
 @bi_bp.route('/geo', methods=['POST', 'GET'])
+@login_required
 def geo():
 
     cantines = data.cantine_nom.sort_values().unique().tolist()

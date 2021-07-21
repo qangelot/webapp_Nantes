@@ -5,11 +5,37 @@
 
 {{ super() }}
 
+<style>
+	.form-wrapper {
+    text-align:center;
+		width: 400px;
+    	margin: 50px auto;
+	}
+    .form-wrapper form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .form-wrapper h2 {
+        margin: 0 0 15px;
+    }
+    fieldset, .submit-button {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .submit-button {   
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+
 {% endblock %}
 
 {% block content %}
 
 {% include "nav.html" %}
+
 
 <div class="form-wrapper">
 
@@ -25,24 +51,25 @@
       </div>
     {% endfor %}
 
-    <h1>Créer un compte</h1>
-
     <form method="POST" action="/signup">
       {{ form.csrf_token }}
+      <h2>Créer un compte</h2>
 
       <fieldset class="name">
-        {{ form.name.label }}
+        {{ form.name.label }} : 
+        <br>
         {{ form.name(placeholder='Eric Dupond') }}
         {% if form.name.errors %}
           <ul class="errors">
-            {% for error in form.email.errors %}
+            {% for error in form.name.errors %}
               <li>{{ error }}</li>{% endfor %}
           </ul>
         {% endif %}
       </fieldset>
-
+      <br>
       <fieldset class="email">
-        {{ form.email.label }}
+        {{ form.email.label }} :
+        <br>
         {{ form.email(placeholder='email@example.com') }}
         {% if form.email.errors %}
           <ul class="errors">
@@ -51,9 +78,10 @@
           </ul>
         {% endif %}
       </fieldset>
-
+      <br>
       <fieldset class="password">
-        {{ form.password.label }}
+        {{ form.password.label }} :
+        <br>
         {{ form.password }}
         {% if form.password.errors %}
           <ul class="errors">
@@ -62,9 +90,10 @@
           </ul>
         {% endif %}
       </fieldset>
-
+      <br>
       <fieldset class="confirm">
-        {{ form.confirm.label }}
+        {{ form.confirm.label }} :
+        <br>
         {{ form.confirm }}
         {% if form.confirm.errors %}
           <ul class="errors">
@@ -73,27 +102,19 @@
           </ul>
         {% endif %}
       </fieldset>
- 
+      <br>
+      <br>
       <div class="submit-button">
         {{ form.submit }}
       </div>
-
-    </form>
-
-    <div class="login-signup">
-      <div>
-        <span>Se connecter</span>
-        <a href="{{ url_for('home_bp.home') }}">Log in.</a>
-      </div>
+      <div class="login-signup">
+        <p>Déjà membre : 
+        <a href="{{ url_for('home_bp.home') }}">Se connecter.</a>
+        </p>
     </div>
-  </div>
-
-
-
-
-
-
-
+  </form>
+</div>
 
 
 {% endblock %}
+
