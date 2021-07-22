@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ super() }}
+
+<style>
+.card{
+    text-align:center;
+    margin: 0 auto;
+    width: 75%;
+}
+.form-wrapper {
+    text-align:center;
+    width: 400px;
+    margin: 50px auto;
+}
+.form-wrapper form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.form-wrapper h2 {
+    margin: 0 0 15px;
+}
+fieldset, .submit-button {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.submit-button {   
+    font-size: 15px;
+    font-weight: bold;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+{% include "nav_pred.html" %}
+
+
+<div class="container-fluid">
+	<!--chart descriptions-->
+
+	<div class="card mt-5" >
+		<div class="card-body">
+		<h2 class="card-title text-center">Outil de prédiction de la fréquentation des cantines nantaise</h2>
+		<p class="card-text text-center"> Prédiction de la fréquentation des cantines de la métropole Nantaise à l'aide d'un algorithme d'IA,
+            de l'expérience des équipes métier et d'un historique de données de 10 ans.</p>
+        </div>
+	<div class="sep"><hr/></div>
+    </div>	
+
+<div class="form-wrapper">
+
+        {% for message in get_flashed_messages() %}
+          <div class="alert alert-warning">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert">
+              x
+            </button>
+            {{ message }}
+          </div>
+        {% endfor %}
+    
+        <form method="POST" action="/predict">
+          {{ form.csrf_token }}
+
+          <h2>Réaliser une prédiction</h2>
+    
+          <fieldset class="date">
+            {{ form.date.label }} : 
+            <br>
+            {{ form.date(placeholder='DD/MM/YYYY') }}
+            {% if form.date.errors %}
+              <ul class="errors">
+                {% for error in form.date.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="prevision">
+            {{ form.prevision.label }} :
+            <br>
+            {{ form.prevision(placeholder='200') }}
+            {% if form.prevision.errors %}
+              <ul class="errors">
+                {% for error in form.prevision.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="cantine_nom">
+            {{ form.cantine_nom.label }} :
+            <br>
+            {{ form.cantine_nom(placeholder='MAISDON PAJOT') }}
+            {% if form.cantine_nom.errors %}
+              <ul class="errors">
+                {% for error in form.cantine_nom.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="annee_scolaire">
+            {{ form.annee_scolaire.label }} :
+            <br>
+            {{ form.annee_scolaire(placeholder='2018-2019') }}
+            {% if form.annee_scolaire.errors %}
+              <ul class="errors">
+                {% for error in form.annee_scolaire.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="effectif">
+            {{ form.effectif.label }} :
+            <br>
+            {{ form.effectif(placeholder='200') }}
+            {% if form.effectif.errors %}
+              <ul class="errors">
+                {% for error in form.effectif.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="quartier_detail">
+            {{ form.quartier_detail.label }} :
+            <br>
+            {{ form.quartier_detail(placeholder='Zola') }}
+            {% if form.quartier_detail.errors %}
+              <ul class="errors">
+                {% for error in form.quartier_detail.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="prix_quartier_detail_m2_appart">
+            {{ form.prix_quartier_detail_m2_appart.label }} :
+            <br>
+            {{ form.prix_quartier_detail_m2_appart(placeholder='3500') }}
+            {% if form.prix_quartier_detail_m2_appart.errors %}
+              <ul class="errors">
+                {% for error in form.prix_quartier_detail_m2_appart.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="prix_moyen_m2_appartement">
+            {{ form.prix_moyen_m2_appartement.label }} :
+            <br>
+            {{ form.prix_moyen_m2_appartement(placeholder='3550') }}
+            {% if form.prix_moyen_m2_appartement.errors %}
+              <ul class="errors">
+                {% for error in form.prix_moyen_m2_appartement.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="prix_moyen_m2_maison">
+            {{ form.prix_moyen_m2_maison.label }} :
+            <br>
+            {{ form.prix_moyen_m2_maison(placeholder='4500') }}
+            {% if form.prix_moyen_m2_maison.errors %}
+              <ul class="errors">
+                {% for error in form.prix_moyen_m2_maison.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="longitude">
+            {{ form.longitude.label }} :
+            <br>
+            {{ form.longitude(placeholder='1.5848') }}
+            {% if form.longitude.errors %}
+              <ul class="errors">
+                {% for error in form.longitude.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="latitude">
+            {{ form.latitude.label }} :
+            <br>
+            {{ form.latitude(placeholder='47.2183') }}
+            {% if form.latitude.errors %}
+              <ul class="errors">
+                {% for error in form.latitude.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="depuis_vacances">
+            {{ form.depuis_vacances.label }} :
+            <br>
+            {{ form.depuis_vacances(placeholder='1') }}
+            {% if form.depuis_vacances.errors %}
+              <ul class="errors">
+                {% for error in form.depuis_vacances.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="depuis_ferie">
+            {{ form.depuis_ferie.label }} :
+            <br>
+            {{ form.depuis_ferie(placeholder='19') }}
+            {% if form.depuis_ferie.errors %}
+              <ul class="errors">
+                {% for error in form.depuis_ferie.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="depuis_juives">
+            {{ form.depuis_juives.label }} :
+            <br>
+            {{ form.depuis_juives(placeholder='43') }}
+            {% if form.depuis_juives.errors %}
+              <ul class="errors">
+                {% for error in form.depuis_juives.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="ramadan_dans">
+            {{ form.ramadan_dans.label }} :
+            <br>
+            {{ form.ramadan_dans(placeholder='245') }}
+            {% if form.ramadan_dans.errors %}
+              <ul class="errors">
+                {% for error in form.ramadan_dans.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <fieldset class="depuis_ramadan">
+            {{ form.depuis_ramadan.label }} :
+            <br>
+            {{ form.depuis_ramadan(placeholder='81') }}
+            {% if form.depuis_ramadan.errors %}
+              <ul class="errors">
+                {% for error in form.depuis_ramadan.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+          <br>
+          <br>
+          <div class="submit-button">
+            {{ form.submit }}
+          </div>
+          
+      </form>
+    </div>
+    
+    {% if pred %}
+    <div class="alert alert-success card" role="alert">
+        <h4 class="alert-heading"> Prédiction de fréquentation de la cantine {{ form.cantine_nom.data }} pour le {{ form.date.data }} : </h4>
+        <h4> <b> {{ pred }} </b> </h4>
+        <hr>
+        <p> <i> Version du modèle : {{ version }} </i> </p>
+      </div>
+    {% endif %}
+</div>	
+
+
+
+{% endblock %}
