@@ -74,6 +74,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Se connecter')
 
 
+class DeleteUserForm(FlaskForm):
+    submit = SubmitField('Supprimer')
+
+
 class PredictForm(FlaskForm):
     """Prediction Form."""
     date = StringField(

@@ -1,11 +1,13 @@
 from flask import current_app as app
 import pandas as pd
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 from flask import url_for, redirect, render_template, \
-request, make_response, Blueprint, flash, session
+request, make_response, Blueprint, flash
 from flask_login import login_required, logout_user, \
 current_user, login_user
 from flask_mail import Message
-from ..forms import ContactForm, SignupForm, LoginForm
+from ..forms import ContactForm, SignupForm, LoginForm, DeleteUserForm
 from ..models import User
 from .. import db, login_manager, maill 
 
@@ -50,8 +52,33 @@ def home():
 def login():
     """Login page."""
 
+    form = DeleteUserForm()
     return render_template(
-        "login.html"
+        "login.html",
+        form=form
+    )
+
+
+@home_bp.route('/delete', methods=['GET', 'POST'])
+@login_required
+def delete():
+    "Delete account"
+
+    form = DeleteUserForm()    
+    if form.validate_on_submit():
+        # create a session
+        engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+        session = Session(bind=engine)
+        # use it to query and delete the user by id
+        user = session.query(User).filter(User.id==current_user.id).one()
+        session.delete(user)
+        session.commit()
+        flash('Votre compte a bien été supprimé.')
+        return redirect(url_for('home_bp.home'))
+
+    return render_template(
+        "login.html",
+        form=form
     )
 
 
@@ -95,8 +122,8 @@ def signup():
             )
             user.set_password(form.password.data)
             db.session.add(user)
-            db.session.commit()  # Create new user
-            login_user(user)  # Log in as newly created user
+            db.session.commit()
+            login_user(user)  # log in as newly created user
             return redirect(url_for('home_bp.home'))
         flash('Cette adresse existe déjà.')
 

@@ -21,7 +21,10 @@
 	min-width: 100%;
 	width: 100%;
 }
-
+.submit-button {   
+        font-size: 15px;
+        font-weight: bold;
+    }
 </style>
 
 {% endblock %}
@@ -85,6 +88,14 @@
 		  <span class="sr-only">Suivant</span>
 		</a>
 	</div>
+
+	<br>
+	<form action="/delete" method="POST">
+		{{ form.csrf_token }}
+		<div class="submit-button">
+			{{ form.submit }}
+		</div>
+	</form>
 
 
 </div>    
