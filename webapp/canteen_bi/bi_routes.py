@@ -13,7 +13,7 @@ from ..scripts.data_prep_geo import geo_figures
 from ..scripts.data_load import load_dataset
 
 
-data = load_dataset(file_name="webapp/data/frequentation_dtwh.db")
+data = load_dataset(file_name=app.config['DTWH'])
 data["date"] = pd.to_datetime(data["date"], format="%Y-%m-%d")
 data.sort_values("date", inplace=True)
 

@@ -16,3 +16,4 @@ Flask-WTF
 Flask-Login
 pymysql
 Flask-Mail
+pytest

@@ -1,5 +1,6 @@
 from os import environ, path
 from dotenv import load_dotenv
+import os
 
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, '.env'))
@@ -19,13 +20,16 @@ class Config:
     MAIL_USERNAME = 'qadev54@gmail.com'
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
     MAIL_SUPPRESS_SEND = False
+    PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
+    DTWH = os.path.join(PROJECT_ROOT, 'webapp/data', 'frequentation_dtwh.db')
+    PWD = environ.get('PWD')
 
 
 class ProdConfig(Config):
     FLASK_ENV = 'production'
     DEBUG = False
     TESTING = False
-    # DATABASE_URI = environ.get('PROD_DATABASE_URI')
+    DATABASE_URI = environ.get('PROD_DATABASE_URI')
 
 
 class DevConfig(Config):
