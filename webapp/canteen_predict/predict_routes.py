@@ -57,7 +57,16 @@ def predict():
             ]
         }
         
-        response = requests.post(URL, json=DATA)
+        try:
+            response = requests.post(URL, json=DATA)
+        # if API offline then 
+        except requests.ConnectionError:
+            flash('Erreur de connection à l\'API. Veuillez réessayer ultérieurement.')            
+            return render_template(
+            "predict.html",
+            form=form
+            )
+        
         json_format = json.loads(response.text)
 
         return render_template(
@@ -82,12 +91,15 @@ def multi_predict():
     
     if request.method == 'POST':
         if 'file' not in request.files:
+            flash('Postez un fichier au format CSV.')   
             return render_template(
             "multi_predict.html"
             )
+            
 
         f = request.files['file']
         if f.filename == '':
+            flash('Postez un fichier au format CSV.')   
             return render_template(
             "multi_predict.html"
             )
@@ -106,8 +118,16 @@ def multi_predict():
             DATA = {
                 "inputs": df.replace({np.nan: None}).to_dict(orient='records') 
             }
+        
+            try:
+                response = requests.post(URL, json=DATA)
+            # if API offline then 
+            except requests.exceptions.ConnectionError:
+                flash('Erreur de connection à l\'API ou de format des données. Vérifier le format de vos données.')            
+                return render_template(
+                "multi_predict.html",
+                )
 
-            response = requests.post(URL, json=DATA)
             json_format = json.loads(response.text)
             preds=['%.2f' % elem for elem in json_format['predictions']]
             print(preds)
@@ -120,7 +140,12 @@ def multi_predict():
                     date_début=date_début,
                     date_fin=date_fin
                 )
-    
+        else:
+            flash('Postez un fichier au format CSV.')   
+            return render_template(
+                "multi_predict.html"
+                )
+
     return render_template(
             "multi_predict.html"
             )

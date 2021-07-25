@@ -50,6 +50,18 @@ fieldset, .submit-button {
 
     <div class="form-wrapper">
 
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="alert">
+                x
+            </button>
+            {{ message }}
+            </div>
+            {% endfor %}
+            
                 <form action="/multi_predict" method="post" enctype="multipart/form-data">
                     <h2>Réaliser plusieurs prédictions</h2>
                         </br>

@@ -29,7 +29,7 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
-    FLASK_ENV = 'development'
+    FLASK_ENV = 'production'
     DEBUG = True
     TESTING = False
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')

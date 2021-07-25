@@ -24,12 +24,13 @@ def create_app():
         from .canteen_bi import bi_routes
         from .canteen_predict import predict_routes
         from .home import routes
-        # from . import auth
+        from . import errors
 
         # Register Blueprints
         app.register_blueprint(bi_routes.bi_bp)
         app.register_blueprint(predict_routes.predict_bp)        
         app.register_blueprint(routes.home_bp)
+        app.register_blueprint(errors.errors_bp)
 
         # Create Database Models
         db.create_all()
