@@ -15,7 +15,7 @@
         <a class="nav-link" href="{{ url_for('predict_bp.predict') }}"> <span class="link-nav"> Prédiction </span> </a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="{{ url_for('predict_bp.analysis') }}"> <span class="link-nav"> Analyse des résultats </span> </a>
+			<a class="nav-link" href="{{ url_for('predict_bp.multi_predict') }}"> <span class="link-nav"> Batch Prédictions </span> </a>
 		</li>
 		{% if current_user.is_authenticated %}
 		<li class="nav-item">

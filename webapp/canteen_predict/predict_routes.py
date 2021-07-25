@@ -1,14 +1,18 @@
 from sys import version
-from flask import current_app as app
+import numpy as np
 import pandas as pd
 import datetime as dt
+import io
+from io import StringIO
+import json
+import requests
+from flask import current_app as app
 from flask import url_for, redirect, render_template, \
 request, make_response, Blueprint, flash
 from wtforms.form import Form
 from flask_login import login_required
-import json
-import requests
 from ..forms import PredictForm
+from werkzeug.utils import secure_filename
 
 
 # connect to the model API 
@@ -52,6 +56,7 @@ def predict():
                 }
             ]
         }
+        
         response = requests.post(URL, json=DATA)
         json_format = json.loads(response.text)
 
@@ -68,7 +73,54 @@ def predict():
     )
 
 
-@predict_bp.route('/analysis', methods=['POST', 'GET'])
+@predict_bp.route('/multi_predict', methods=['POST', 'GET'])
 @login_required
-def analysis():
-    pass
+def multi_predict():
+    """ Batch predictions page.
+    GET requests serve predict page.
+    POST requests validate form & post request to API."""
+    
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return render_template(
+            "multi_predict.html"
+            )
+
+        f = request.files['file']
+        if f.filename == '':
+            return render_template(
+            "multi_predict.html"
+            )
+
+        if f and f.filename.rsplit('.', 1)[1].lower() == 'csv':
+            stream = io.StringIO(f.stream.read().decode("UTF8"), newline=None)    
+            stream.seek(0)
+            result = stream.read()
+            df = pd.read_csv(StringIO(result))
+            cantine = df['cantine_nom'].iloc[0]
+            date_début = df['date'].iloc[0]
+            date_fin = df['date'].iloc[-1]
+            df['date'] = df['date'].apply(lambda x : dt.datetime.strptime(x, "%d/%m/%Y").strftime("%Y-%m-%d %H:%M:%S"))
+
+            # use to_dict instead of to_json
+            DATA = {
+                "inputs": df.replace({np.nan: None}).to_dict(orient='records') 
+            }
+
+            response = requests.post(URL, json=DATA)
+            json_format = json.loads(response.text)
+            preds=['%.2f' % elem for elem in json_format['predictions']]
+            print(preds)
+
+            return render_template(
+                    "multi_predict.html",
+                    pred=preds,
+                    version=json_format['version'],
+                    cantine_nom=cantine,
+                    date_début=date_début,
+                    date_fin=date_fin
+                )
+    
+    return render_template(
+            "multi_predict.html"
+            )

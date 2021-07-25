@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ super() }}
+
+<style>
+.card{
+    text-align:center;
+    margin: 0 auto;
+    width: 75%;
+}
+.form-wrapper {
+    text-align:center;
+    width: 400px;
+    margin: 50px auto;
+}
+.form-wrapper form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.form-wrapper h2 {
+    margin: 0 0 15px;
+}
+fieldset, .submit-button {
+    min-height: 38px;
+    border-radius: 2px;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+{% include "nav_pred.html" %}
+
+
+<div class="container-fluid">
+
+	<div class="card mt-5" >
+		<div class="card-body">
+		<h2 class="card-title text-center">Outil de prédiction de la fréquentation des cantines nantaise</h2>
+		<p class="card-text text-center"> Prédiction de la fréquentation des cantines de la métropole Nantaise à l'aide d'un algorithme d'IA,
+            de l'expérience des équipes métier et d'un historique de données de 10 ans.</p>
+        </div>
+	<div class="sep"><hr/></div>
+    </div>	
+
+    <div class="form-wrapper">
+
+                <form action="/multi_predict" method="post" enctype="multipart/form-data">
+                    <h2>Réaliser plusieurs prédictions</h2>
+                        </br>
+                        <p> Insérez votre fichier au format CSV : </p>
+                        </br>
+                        <input type="file" name="file" class="form-control-file" id="inputfile"/>
+                        </br>
+                    <button type="submit"  class="submit-button" >Prédire</button>
+                </form>         
+    </div>
+
+
+    {% if pred %}
+    <div class="alert alert-success card" role="alert">
+        <h4 class="alert-heading"> Prédictions de fréquentation de la cantine {{ cantine_nom }} du {{ date_début }} au {{ date_fin}} : </h4>
+        </br>
+        {% for p in pred %}
+        <h4> <b> {{ p }} </b> </h4>
+        {% endfor %}
+        <hr>
+        <p> <i> Version du modèle : {{ version }} </i> </p>
+    </div>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
