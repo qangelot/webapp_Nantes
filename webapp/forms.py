@@ -1,7 +1,7 @@
 from sys import intern
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, PasswordField, \
-IntegerField, FloatField
+IntegerField, FloatField, ValidationError
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
@@ -112,7 +112,7 @@ class PredictForm(FlaskForm):
         ]
     )
     quartier_detail = StringField(
-        'Cantine',
+        'Quartier',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]

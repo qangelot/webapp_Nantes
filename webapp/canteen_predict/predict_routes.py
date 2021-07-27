@@ -2,10 +2,8 @@ from sys import version
 import numpy as np
 import pandas as pd
 import datetime as dt
-import io
 from io import StringIO
-import json
-import requests
+import io, json, requests
 from flask import current_app as app
 from flask import url_for, redirect, render_template, \
 request, make_response, Blueprint, flash
@@ -56,7 +54,7 @@ def predict():
                 }
             ]
         }
-        
+
         try:
             response = requests.post(URL, json=DATA)
         # if API offline then 
@@ -95,7 +93,6 @@ def multi_predict():
             return render_template(
             "multi_predict.html"
             )
-            
 
         f = request.files['file']
         if f.filename == '':
@@ -118,7 +115,7 @@ def multi_predict():
             DATA = {
                 "inputs": df.replace({np.nan: None}).to_dict(orient='records') 
             }
-        
+
             try:
                 response = requests.post(URL, json=DATA)
             # if API offline then 
@@ -129,6 +126,7 @@ def multi_predict():
                 )
 
             json_format = json.loads(response.text)
+
             preds=['%.2f' % elem for elem in json_format['predictions']]
             print(preds)
 

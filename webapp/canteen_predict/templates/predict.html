@@ -63,6 +63,7 @@ fieldset, .submit-button {
         {% endfor %}
     
         <form method="POST" action="/predict">
+          
           {{ form.csrf_token }}
 
           <h2>Réaliser une prédiction</h2>

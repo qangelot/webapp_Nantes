@@ -114,6 +114,15 @@ def signup():
 
     form = SignupForm()
     if form.validate_on_submit():
+
+        # check email subdomain matches the authorized one
+        if "@nantesmetropole.fr" not in form.email.data and form.email.data != app.config['ADMIN_EMAIL']:
+            flash('Cette adresse n\'est pas autorisée.')
+            return render_template(
+                "signup.html",
+                form=form
+            )
+        
         existing_user = User.query.filter_by(email=form.email.data).first()
         if existing_user is None:
             user = User(

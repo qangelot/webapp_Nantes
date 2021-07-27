@@ -79,7 +79,7 @@ fieldset, .submit-button {
         <h4 class="alert-heading"> Prédictions de fréquentation de la cantine {{ cantine_nom }} du {{ date_début }} au {{ date_fin}} : </h4>
         </br>
         {% for p in pred %}
-        <h4> <b> {{ p }} </b> </h4>
+        <h4> {{ p }} </h4>
         {% endfor %}
         <hr>
         <p> <i> Version du modèle : {{ version }} </i> </p>
