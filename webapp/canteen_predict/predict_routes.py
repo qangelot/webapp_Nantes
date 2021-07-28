@@ -9,17 +9,14 @@ from flask import url_for, redirect, render_template, \
 request, make_response, Blueprint, flash
 from wtforms.form import Form
 from flask_login import login_required
+from . import predict_bp
+
 from ..forms import PredictForm
 from werkzeug.utils import secure_filename
 
 
 # connect to the model API 
 URL = "http://localhost:8001/api/v1/predict"
-
-# Blueprint Configuration
-predict_bp = Blueprint(
-    "predict_bp", __name__, template_folder="templates", static_folder="static"
-)
 
 
 @predict_bp.route('/predict', methods=['POST', 'GET'])

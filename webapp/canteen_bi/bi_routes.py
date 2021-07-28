@@ -2,8 +2,9 @@ from flask import current_app as app
 import json, plotly
 import pandas as pd
 from flask import url_for, redirect, render_template, \
-request, make_response, Blueprint
+request, make_response
 from flask_login import login_required
+from . import bi_bp
 
 from ..scripts.data_prep_freq import freq_figures
 from ..scripts.data_prep_menus import menus_figures
@@ -16,11 +17,6 @@ from ..scripts.data_load import load_dataset
 data = load_dataset(file_name=app.config['DTWH'])
 data["date"] = pd.to_datetime(data["date"], format="%Y-%m-%d")
 data.sort_values("date", inplace=True)
-
-# Blueprint Configuration
-bi_bp = Blueprint(
-    "bi_bp", __name__, template_folder="templates", static_folder="static"
-)
 
 
 @bi_bp.route('/freq', methods=['POST', 'GET'])

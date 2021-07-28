@@ -6,11 +6,11 @@ from flask_wtf.csrf import CSRFProtect
 
 
 
-# Globally accessible libraries
+# instantiate plugins globally
 db = SQLAlchemy()
 maill = Mail()
 login_manager = LoginManager()
-crsf_protect = CSRFProtect()
+# crsf_protect = CSRFProtect()
 
 def create_app():
     """Initialize the core application."""
@@ -21,7 +21,7 @@ def create_app():
     db.init_app(app)
     maill.init_app(app)
     login_manager.init_app(app)
-    crsf_protect.init_app(app)
+    # crsf_protect.init_app(app)
 
     with app.app_context():
         # Include our Routes

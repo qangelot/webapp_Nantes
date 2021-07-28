@@ -8,7 +8,7 @@ load_dotenv(path.join(PACKAGE_ROOT, '.env'))
 
 
 class Config:
-    """Base config."""
+    """Base config class."""
     PACKAGE_ROOT = PACKAGE_ROOT
     FLASK_APP = 'wsgi.py'
     SECRET_KEY = environ.get('SECRET_KEY')
@@ -40,5 +40,11 @@ class DevConfig(Config):
     FLASK_ENV = 'development'
     DEBUG = True
     TESTING = False
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
+    # API_URL = environ.get('DEV_API_URL')
+
+class TestConfig(Config):
+    DEBUG = True
+    TESTING = True
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
     # API_URL = environ.get('DEV_API_URL')

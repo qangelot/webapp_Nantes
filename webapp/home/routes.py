@@ -10,12 +10,7 @@ from flask_mail import Message
 from ..forms import ContactForm, SignupForm, LoginForm, DeleteUserForm
 from ..models import User
 from .. import db, login_manager, maill 
-
-
-# Blueprint Configuration
-home_bp = Blueprint(
-    "home_bp", __name__, template_folder="templates", static_folder="static"
-)
+from . import home_bp
 
 
 @home_bp.route('/', methods=['POST', 'GET'])
