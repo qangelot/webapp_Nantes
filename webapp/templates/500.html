@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Une erreur attendue c'est produite!</h1>
+
+<h1 class="errorpage-title"> Erreur de serveur interne (500)</h1>
+<div class="errorpage-section">
+    <h4>Une erreur serveur inattendue c'est produite!</h4>
     <p>L'administrateur du serveur a été notifié. Veuillez nous excuser pour le désagrément!</p>
-    <p><a href="{{ url_for('home_bp.home') }}">retour</a></p>
+    <div style = "text-align: center; margin-top: 50px; margin-bottom: 100px;">
+        <a href="{{ url_for('home_bp.home') }}" >
+            <button class="btn btn-primary " name="back" type="back">Retour</button>
+        </a>
+    </div>  
+</div>
+
 {% endblock %}
