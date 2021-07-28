@@ -38,6 +38,10 @@ def create_app():
         app.register_blueprint(predict_routes.predict_bp)        
         app.register_blueprint(routes.home_bp)
 
+        # Configure logging
+        if app.config['FLASK_ENV'] == 'production':
+            configure_logging(app)
+
         # Register error handlers
         register_error_handlers(app)
 
@@ -74,3 +78,23 @@ def register_error_handlers(app):
     @app.errorhandler(500)
     def server_error(e):
         return render_template('500.html'), 500
+
+
+# Create a file handler for logging
+def configure_logging(app):
+
+    # Deactivate the default stream logger
+    app.logger.removeHandler(default_handler)
+
+    # File handler : new file created when actual reach 20000 bytes / limit max log file to 20
+    file_handler = RotatingFileHandler('webapp.log', maxBytes=20000, backupCount=20)
+
+    # Create a file formatter and add it to the handler
+    file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(filename)s: %(lineno)d]')
+    file_handler.setFormatter(file_formatter)
+
+    # Add file handler object to the logger
+    app.logger.addHandler(file_handler)
+    
+    # Set the logging level
+    app.logger.setLevel(logging.INFO)

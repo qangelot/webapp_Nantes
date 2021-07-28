@@ -41,10 +41,12 @@ class DevConfig(Config):
     DEBUG = True
     TESTING = False
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
+    # MAIL_SUPPRESS_SEND = True
     # API_URL = environ.get('DEV_API_URL')
 
 class TestConfig(Config):
     DEBUG = True
     TESTING = True
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
+    # MAIL_SUPPRESS_SEND = True
     # API_URL = environ.get('DEV_API_URL')

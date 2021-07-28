@@ -28,6 +28,7 @@ def freq():
 
     if (request.method == 'POST') and len(selected_canteen)>0 and len(request.form.get('start_date'))>0 \
         and len(request.form.get('end_date'))>0:
+        app.logger.info(f"Demande d'informations sur la cantine {selected_canteen}")
         figures = freq_figures(canteen=selected_canteen, start_date=request.form.get('start_date'),
         end_date=request.form.get('end_date'))
 
@@ -40,7 +41,7 @@ def freq():
 
     # Convert the plotly figures to JSON for javascript in html template
     figuresJSON = json.dumps(figures, cls=plotly.utils.PlotlyJSONEncoder)
-
+    
     return render_template('freq.html',
                             ids=ids,
                             cantines=cantines,
@@ -60,6 +61,7 @@ def menus():
         and len(request.form.get('end_date'))>0:
         figures = menus_figures(canteen=selected_canteen, start_date=request.form.get('start_date'),
         end_date=request.form.get('end_date'))
+        app.logger.info(f"Demande d'informations sur la cantine {selected_canteen}")
 
     else:
         selected_canteen = "AGENETS"
@@ -90,6 +92,7 @@ def tempo():
         and len(request.form.get('end_date'))>0:
         figures = tempo_figures(canteen=selected_canteen, start_date=request.form.get('start_date'),
         end_date=request.form.get('end_date'))
+        app.logger.info(f"Demande d'informations sur la cantine {selected_canteen}")
 
     else:
         selected_canteen = "AGENETS"
@@ -120,6 +123,7 @@ def geo():
         and len(request.form.get('end_date'))>0:
         figures = geo_figures(canteen=selected_canteen, start_date=request.form.get('start_date'),
         end_date=request.form.get('end_date'))
+        app.logger.info(f"Demande d'informations sur la cantine {selected_canteen}")
 
     else:
         selected_canteen = "AGENETS"

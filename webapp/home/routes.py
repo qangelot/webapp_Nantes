@@ -31,8 +31,10 @@ def home():
         if user and user.check_password(password=form.password.data):
             login_user(user)
             next_page = request.args.get('next')
+            app.logger.info("Connexion réussie.")
             return redirect(next_page or url_for('home_bp.login'))
-
+        
+        app.logger.warning("Connexion échouée.")
         flash('L\'adresse mail et/ou le mot de passe sont incorrects')
         return redirect(url_for('home_bp.home'))
 
@@ -68,6 +70,7 @@ def delete():
         user = session.query(User).filter(User.id==current_user.id).one()
         session.delete(user)
         session.commit()
+        app.logger.warning("Compte supprimé.")
         flash('Votre compte a bien été supprimé.')
         return redirect(url_for('home_bp.home'))
 
@@ -93,6 +96,7 @@ def contact():
         %s
         """ % (form.name.data, form.email.data, form.body.data)
         maill.send(msg)
+        app.logger.info("Formulaire de contact envoyé.")
         return redirect(url_for('home_bp.home'))
 
     return render_template(
@@ -128,6 +132,7 @@ def signup():
             db.session.add(user)
             db.session.commit()
             login_user(user)  # log in as newly created user
+            app.logger.info("Création d'un nouvel utilisateur réussie.")
             return redirect(url_for('home_bp.home'))
         flash('Cette adresse existe déjà.')
 

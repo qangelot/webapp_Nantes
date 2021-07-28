@@ -51,6 +51,8 @@ def predict():
                 }
             ]
         }
+        
+        app.logger.info(f"Réalisation d'une prédiction sur les inputs suivant : {DATA}")
 
         try:
             response = requests.post(URL, json=DATA)
@@ -63,6 +65,7 @@ def predict():
             )
         
         json_format = json.loads(response.text)
+        app.logger.info(f"Résultat de la prédiction : {json_format['predictions'][0]}")
 
         return render_template(
                 "predict.html",
@@ -113,6 +116,8 @@ def multi_predict():
                 "inputs": df.replace({np.nan: None}).to_dict(orient='records') 
             }
 
+            app.logger.info(f"Réalisation d'une prédiction par lots sur les inputs suivant : {DATA}")
+
             try:
                 response = requests.post(URL, json=DATA)
             # if API offline then 
@@ -123,9 +128,9 @@ def multi_predict():
                 )
 
             json_format = json.loads(response.text)
-
             preds=['%.2f' % elem for elem in json_format['predictions']]
-            print(preds)
+            
+            app.logger.info(f"Résultats de la prédiction par lots : {preds}")
 
             return render_template(
                     "multi_predict.html",
