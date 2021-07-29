@@ -129,12 +129,17 @@ def multi_predict():
 
             json_format = json.loads(response.text)
             preds=['%.2f' % elem for elem in json_format['predictions']]
-            
+            df_pred = pd.DataFrame(preds, columns=['predictions']).reset_index(drop=True)
+
             app.logger.info(f"Résultats de la prédiction par lots : {preds}")
+            
+            df_pred = pd.concat((df['date'].reset_index(drop=True), df_pred), axis=1)
+            df_pred['date'] = df_pred['date'].apply(lambda x : dt.datetime.strptime(x, "%Y-%m-%d %H:%M:%S").strftime("%d/%m/%Y"))
 
             return render_template(
                     "multi_predict.html",
-                    pred=preds,
+                    tables=[df_pred.to_html(classes='data')], 
+                    titles=df_pred.columns.values,
                     version=json_format['version'],
                     cantine_nom=cantine,
                     date_début=date_début,
