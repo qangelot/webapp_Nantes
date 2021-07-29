@@ -35,27 +35,14 @@ def freq_figures(canteen, start_date, end_date):
 
 
   # attendance graph
-  freq_graph = []
-
-  freq_graph.append(
-      go.Scatter(
+  freq_graph = go.Figure(
+    data=[go.Scatter(
       x = data_filter.date.tolist(),
       y = data_filter.reel.tolist(),
       mode = 'lines',
       name = 'Fréquentation',
       line=dict(color="#548CA8")
-      )
-  )
-
-  freq_layout = dict(title = "Fréquentation réelle",
-                  xaxis = dict(title = 'Année', autotick=True),
-                  yaxis = dict(title = 'Volume'),
-                  )
-
-  # forecasting graph
-  prev_graph = []
-
-  prev_graph.append(
+      ), 
       go.Scatter(
       x = data_filter.date.tolist(),
       y = data_filter.prevision.tolist(),
@@ -63,12 +50,15 @@ def freq_figures(canteen, start_date, end_date):
       name = 'Prévision',
       line=dict(color="#9960d6")
       )
+  ], 
+  layout = {
+        'title' : {'text': "Fréquentation réelle et prévisions"},
+        'xaxis': {'title': 'Année'},
+        'yaxis': {'title': 'Volume'}
+    }
   )
-
-  prev_layout = dict(title = "Prévisions de fréquentation",
-                  xaxis = dict(title = 'Année', autotick=True),
-                  yaxis = dict(title = 'Volume'),
-                  )
+  
+  freq_graph.update_layout(title_x=0.5)
 
   # global attendance graph
   freq_global_graph = []
@@ -145,8 +135,7 @@ def freq_figures(canteen, start_date, end_date):
 
   # append all charts
   figures = []
-  figures.append(dict(data=freq_graph, layout=freq_layout))
-  figures.append(dict(data=prev_graph, layout=prev_layout))
+  figures.append(freq_graph)
   figures.append(dict(data=freq_global_graph, layout=freq_global_layout))
   figures.append(dict(data=trend_global_graph, layout=trend_global_layout))
   figures.append(dict(data=seasonal_global_graph, layout=seasonal_global_layout))
