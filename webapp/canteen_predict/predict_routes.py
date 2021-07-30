@@ -15,8 +15,8 @@ from ..forms import PredictForm
 from werkzeug.utils import secure_filename
 
 
-# connect to the model API 
-URL = "http://localhost:8001/api/v1/predict"
+# connect to the API serving the ML model
+URL = app.config['API_URL']
 
 
 @predict_bp.route('/predict', methods=['POST', 'GET'])

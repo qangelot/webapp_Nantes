@@ -13,9 +13,21 @@
 }
 .carousel {
 	text-align:center;
-	height: 75%;
+	height: 70%;
 	width: 75%;
 	margin: 50px auto;
+}
+@media screen and (min-width : 764px) {
+	.carousel {
+		height: 60%;
+		width: 65%;
+	}
+}
+@media only screen and (min-width : 1024px) {
+	.carousel {
+		height: 50%;
+		width: 55%;
+	}
 }
 .carousel-inner .item img {
 	min-width: 100%;
@@ -25,7 +37,10 @@
         font-size: 15px;
         font-weight: bold;
 		text-align: center;
-    }
+}
+.carousel-caption {
+	color: beige;
+}
 </style>
 
 {% endblock %}
@@ -62,7 +77,7 @@
 			<a href="{{ url_for('bi_bp.freq') }}">
 			<img class="d-block w-100" src="{{ url_for('static', filename='img/bi.jpg') }}" alt="bi app page">
 			<div class="carousel-caption">
-				<h2>Opti Canteen BI</h2>
+				<h3>Opti Canteen BI</h3>
 			</div>
 			</a>
 		</div>
@@ -70,7 +85,7 @@
 			<a href="{{ url_for('predict_bp.predict') }}">
 			<img class="d-block w-100" src="{{ url_for('static', filename='img/ia.jpg') }}" alt="ia app page">
 			<div class="carousel-caption">
-				<h2>Opti Canteen Predict</h2>
+				<h3>Opti Canteen Predict</h3>
 			</div>
 			</a>
 		</div>
@@ -78,7 +93,7 @@
 			<a href="{{ url_for('home_bp.contact') }}">
 			<img class="d-block w-100" src="{{ url_for('static', filename='img/contact.jpg') }}" alt="contact page">
 			<div class="carousel-caption">
-				<h2>Boîte à idées</h2>
+				<h3>Boîte à idées</h3>
 			</div>
 		</a>
 		</div>

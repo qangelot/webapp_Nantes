@@ -12,9 +12,20 @@
 }
 .form-wrapper {
     text-align:center;
-    width: 400px;
+    width: 75%;
     margin: 50px auto;
 }
+@media screen and (min-width : 764px) {
+	.form-wrapper {
+		width: 60%;
+	}
+}
+@media only screen and (min-width : 1280px) {
+	.form-wrapper {
+		width: 40%;
+	}
+}
+
 .form-wrapper form {
     margin-bottom: 15px;
     background: #f7f7f7;
@@ -51,7 +62,6 @@ fieldset, .submit-button {
     </p>
     </div>
 </div>	
-
 <div class="form-wrapper">
 
         {% for message in get_flashed_messages() %}
@@ -71,9 +81,12 @@ fieldset, .submit-button {
           {{ form.csrf_token }}
 
           <h2>Réaliser une prédiction</h2>
-    
+          <br>
+
+          <div class="row">
+          <div class="col-md 6">
           <fieldset class="date">
-            {{ form.date.label }} : 
+            {{ form.date.label }}
             <br>
             {{ form.date(placeholder='DD/MM/YYYY') }}
             {% if form.date.errors %}
@@ -84,8 +97,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+          <div class="col-md 6">
           <fieldset class="prevision">
-            {{ form.prevision.label }} :
+            {{ form.prevision.label }}
             <br>
             {{ form.prevision(placeholder='200') }}
             {% if form.prevision.errors %}
@@ -96,8 +112,13 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md 6">
           <fieldset class="cantine_nom">
-            {{ form.cantine_nom.label }} :
+            {{ form.cantine_nom.label }}
             <br>
             {{ form.cantine_nom(placeholder='MAISDON PAJOT') }}
             {% if form.cantine_nom.errors %}
@@ -108,8 +129,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+        <div class="col-md 6">
           <fieldset class="annee_scolaire">
-            {{ form.annee_scolaire.label }} :
+            {{ form.annee_scolaire.label }}
             <br>
             {{ form.annee_scolaire(placeholder='2018-2019') }}
             {% if form.annee_scolaire.errors %}
@@ -120,8 +144,13 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md 6">
           <fieldset class="effectif">
-            {{ form.effectif.label }} :
+            {{ form.effectif.label }}
             <br>
             {{ form.effectif(placeholder='200') }}
             {% if form.effectif.errors %}
@@ -132,8 +161,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+          <div class="col-md 6">
           <fieldset class="quartier_detail">
-            {{ form.quartier_detail.label }} :
+            {{ form.quartier_detail.label }}
             <br>
             {{ form.quartier_detail(placeholder='Zola') }}
             {% if form.quartier_detail.errors %}
@@ -144,8 +176,13 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md 6">
           <fieldset class="prix_quartier_detail_m2_appart">
-            {{ form.prix_quartier_detail_m2_appart.label }} :
+            {{ form.prix_quartier_detail_m2_appart.label }}
             <br>
             {{ form.prix_quartier_detail_m2_appart(placeholder='3500') }}
             {% if form.prix_quartier_detail_m2_appart.errors %}
@@ -156,8 +193,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+          <div class="col-md 6">
           <fieldset class="prix_moyen_m2_appartement">
-            {{ form.prix_moyen_m2_appartement.label }} :
+            {{ form.prix_moyen_m2_appartement.label }}
             <br>
             {{ form.prix_moyen_m2_appartement(placeholder='3550') }}
             {% if form.prix_moyen_m2_appartement.errors %}
@@ -168,8 +208,13 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md 6">
           <fieldset class="prix_moyen_m2_maison">
-            {{ form.prix_moyen_m2_maison.label }} :
+            {{ form.prix_moyen_m2_maison.label }}
             <br>
             {{ form.prix_moyen_m2_maison(placeholder='4500') }}
             {% if form.prix_moyen_m2_maison.errors %}
@@ -180,8 +225,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+          <div class="col-md 6">
           <fieldset class="longitude">
-            {{ form.longitude.label }} :
+            {{ form.longitude.label }}
             <br>
             {{ form.longitude(placeholder='1.5848') }}
             {% if form.longitude.errors %}
@@ -192,8 +240,13 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md 6">
           <fieldset class="latitude">
-            {{ form.latitude.label }} :
+            {{ form.latitude.label }}
             <br>
             {{ form.latitude(placeholder='47.2183') }}
             {% if form.latitude.errors %}
@@ -204,8 +257,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+          <div class="col-md 6">
           <fieldset class="depuis_vacances">
-            {{ form.depuis_vacances.label }} :
+            {{ form.depuis_vacances.label }}
             <br>
             {{ form.depuis_vacances(placeholder='1') }}
             {% if form.depuis_vacances.errors %}
@@ -216,8 +272,13 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md 6">
           <fieldset class="depuis_ferie">
-            {{ form.depuis_ferie.label }} :
+            {{ form.depuis_ferie.label }}
             <br>
             {{ form.depuis_ferie(placeholder='19') }}
             {% if form.depuis_ferie.errors %}
@@ -228,8 +289,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+          <div class="col-md 6">
           <fieldset class="depuis_juives">
-            {{ form.depuis_juives.label }} :
+            {{ form.depuis_juives.label }}
             <br>
             {{ form.depuis_juives(placeholder='43') }}
             {% if form.depuis_juives.errors %}
@@ -240,8 +304,13 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md 6">
           <fieldset class="ramadan_dans">
-            {{ form.ramadan_dans.label }} :
+            {{ form.ramadan_dans.label }}
             <br>
             {{ form.ramadan_dans(placeholder='245') }}
             {% if form.ramadan_dans.errors %}
@@ -252,8 +321,11 @@ fieldset, .submit-button {
             {% endif %}
           </fieldset>
           <br>
+        </div>
+
+          <div class="col-md 6">
           <fieldset class="depuis_ramadan">
-            {{ form.depuis_ramadan.label }} :
+            {{ form.depuis_ramadan.label }}
             <br>
             {{ form.depuis_ramadan(placeholder='81') }}
             {% if form.depuis_ramadan.errors %}
@@ -263,12 +335,15 @@ fieldset, .submit-button {
               </ul>
             {% endif %}
           </fieldset>
+        </div>
+      </div>
+
           <br>
           <br>
-          <div class="submit-button">
+
+          <div class="submit-button text-center">
             {{ form.submit }}
           </div>
-          
       </form>
     </div>
     
@@ -281,7 +356,6 @@ fieldset, .submit-button {
       </div>
     {% endif %}
 </div>	
-
-
+</div>	
 
 {% endblock %}

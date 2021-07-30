@@ -118,19 +118,19 @@ class PredictForm(FlaskForm):
         ]
     )
     prix_quartier_detail_m2_appart = IntegerField(
-        'Prix du m² des appartement du quartier détaillé',
+        'Prix/m² quartier détaillé',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]
     )
     prix_moyen_m2_appartement = IntegerField(
-        'Prix du m² des appartement du quartier',
+        'Prix/m² du quartier',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]
     )
     prix_moyen_m2_maison = IntegerField(
-        'Prix du m² des maisons du quartier',
+        'Prix/m² des maisons',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]
@@ -148,31 +148,31 @@ class PredictForm(FlaskForm):
         ]
     )
     depuis_vacances = IntegerField(
-        'Jours écoulés depuis les vacances',
+        'Depuis les vacances',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]
     )
     depuis_ferie = IntegerField(
-        'Jours écoulés depuis un jour férié',
+        'Depuis jour férié',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]
     )
     depuis_juives = IntegerField(
-        'Jours écoulés depuis la dernière fête juive',
+        'Depuis fête juive',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]
     )
     ramadan_dans = IntegerField(
-        'Nombre de jours jusqu\'au prochain Ramadan',
+        'Prochain Ramadan',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]
     )
     depuis_ramadan = IntegerField(
-        'Jours écoulés depuis le Ramadan',
+        'Depuis Ramadan',
         validators=[
             DataRequired(message='Renseignez le champs au bon format.')
         ]

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1 class="errorpage-title">Mauvaise requête (400)</h1>
-<div class="errorpage-section">
-    <h4>La requête est incorrecte.</h4>
-    <div style = "text-align: center; margin-top: 50px; margin-bottom: 100px;">
-    <a href="{{ url_for('home_bp.home') }}" >
-        <button class="btn btn-primary " name="back" type="back">Retour</button>
-    </a>
-    </div>  
+<div class="container-fluid text-center mt-3">
+    <h1 class="errorpage-title">Mauvaise requête (400)</h1>
+    <div class="errorpage-section">
+        <h4>La requête est incorrecte.</h4>
+        <div style = "text-align: center; margin-top: 50px; margin-bottom: 100px;">
+        <a href="{{ url_for('home_bp.home') }}" >
+            <button class="btn btn-primary " name="back" type="back">Retour</button>
+        </a>
+        </div>  
+    </div>
 </div>
-
 {% endblock %}

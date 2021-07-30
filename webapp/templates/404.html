@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1 class="errorpage-title">Page non trouvée (404)</h1>
-<div class="errorpage-section">
-    <h4>Oups! La page que vous recherchez semble introuvable.</h4>
-    <div style = "text-align: center; margin-top: 50px; margin-bottom: 100px;">
-    <a href="{{ url_for('home_bp.home') }}" >
-        <button class="btn btn-primary " name="back" type="back">Retour</button>
-    </a>
-    </div>  
+<div class="container-fluid text-center mt-3">
+    <h1 class="errorpage-title">Page non trouvée (404)</h1>
+    <div class="errorpage-section">
+        <h4>Oups! La page que vous recherchez semble introuvable.</h4>
+        <div style = "text-align: center; margin-top: 50px; margin-bottom: 100px;">
+        <a href="{{ url_for('home_bp.home') }}" >
+            <button class="btn btn-primary " name="back" type="back">Retour</button>
+        </a>
+        </div>  
+    </div>
 </div>
-
 {% endblock %}

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime
-
+from flask import current_app as app
 import plotly.graph_objs as go
 import plotly.colors
 import statsmodels.api as sm
@@ -21,7 +21,7 @@ def freq_figures(canteen, start_date, end_date):
   start_date = datetime.strptime(start_date , '%d/%m/%Y').strftime("%Y-%m-%d")
   end_date = datetime.strptime(end_date , '%d/%m/%Y').strftime("%Y-%m-%d")
 
-  data = load_dataset(file_name="webapp/data/frequentation_dtwh.db")
+  data = load_dataset(file_name=app.config['DTWH'])
   data["date"] = pd.to_datetime(data["date"], format="%Y-%m-%d")
   data.sort_values("date", inplace=True)
 
