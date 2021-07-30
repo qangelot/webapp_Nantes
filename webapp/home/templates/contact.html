@@ -13,8 +13,18 @@
     }
 .form-wrapper {
     text-align:center;
-    width: 500px;
+    width: 75%;
     margin: 50px auto;
+}
+@media screen and (min-width : 764px) {
+	.form-wrapper {
+		width: 60%;
+	}
+}
+@media only screen and (min-width : 1280px) {
+	.form-wrapper {
+		width: 40%;
+	}
 }
 .form-wrapper form {
     margin-bottom: 15px;
@@ -26,7 +36,7 @@
     margin: 0 0 15px;
 }
 fieldset, .submit-button {
-    min-height: 38px;
+    min-height: 40px;
     border-radius: 2px;
 }
 .submit-button {   
@@ -35,8 +45,9 @@ fieldset, .submit-button {
 }
 #larger {
 height: 200px;
-width: 400px;
+width: 75%;
 }
+
 </style>
 
 {% endblock %}

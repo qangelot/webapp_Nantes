@@ -10,10 +10,20 @@
     margin: 0 auto;
     width: 75%;
 }
-.form-wrapper {
+.form-wrapper, .alert {
     text-align:center;
-    width: 400px;
+    width: 75%;
     margin: 50px auto;
+}
+@media screen and (min-width : 764px) {
+	.form-wrapper,.alert {
+		width: 60%;
+	}
+}
+@media only screen and (min-width : 1280px) {
+	.form-wrapper,.alert {
+		width: 40%;
+	}
 }
 .form-wrapper form {
     margin-bottom: 15px;
@@ -80,7 +90,7 @@ fieldset, .submit-button {
 
     {% if tables %}
     <div class="alert alert-success card" role="alert">
-        <h4 class="alert-heading"> Prédictions de fréquentation de la cantine {{ cantine_nom }} du {{ date_début }} au {{ date_fin}} : </h4>
+        <h4 class="alert-heading"> Prédictions de fréquentation de la cantine {{ cantine_nom }} du {{ date_début }} au {{ date_fin}} </h4>
         </br>
         {% for table in tables %}
             {{titles[loop.index]}}

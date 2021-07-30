@@ -58,7 +58,7 @@ def freq_figures(canteen, start_date, end_date):
     }
   )
   
-  freq_graph.update_layout(title_x=0.5)
+  freq_graph.update_layout(title_x=0.5, plot_bgcolor="rgb(230,230,250)")
 
   # global attendance graph
   freq_global_graph = []

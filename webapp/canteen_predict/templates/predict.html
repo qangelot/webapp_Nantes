@@ -10,18 +10,18 @@
     margin: 0 auto;
     width: 75%;
 }
-.form-wrapper {
+.form-wrapper, .alert {
     text-align:center;
     width: 75%;
     margin: 50px auto;
 }
 @media screen and (min-width : 764px) {
-	.form-wrapper {
+	.form-wrapper,.alert {
 		width: 60%;
 	}
 }
 @media only screen and (min-width : 1280px) {
-	.form-wrapper {
+	.form-wrapper,.alert {
 		width: 40%;
 	}
 }
@@ -349,7 +349,7 @@ fieldset, .submit-button {
     {% if pred %}
     <div class="alert alert-success card" role="alert">
         <h4 class="alert-heading"> Prédiction de fréquentation de la cantine {{ form.cantine_nom.data }} pour le {{ form.date.data }} : </h4>
-        <h4> <b> {{ pred }} </b> </h4>
+        <h4> <u> {{ pred }} </u> </h4>
         <hr>
         <p> <i> Version du modèle : {{ version }} </i> </p>
       </div>

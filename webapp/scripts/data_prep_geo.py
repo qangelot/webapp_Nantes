@@ -33,40 +33,34 @@ def geo_figures(canteen, start_date, end_date):
   data_filter_date = data.query('date >= @start_date and date <= @end_date')
   data_filter = data.query('cantine_nom == @canteen and date >= @start_date and date <= @end_date')
 
+  # grouping data for global attendance graph
+  grouped_date = data_filter_date.groupby('date')['attendance_rate'].mean().reset_index()
+
   # attendance graph
-  att_graph = []
-    
-  att_graph.append(
-      go.Scatter(
+  attendance_graph = go.Figure(
+    data=[go.Scatter(
       x = data_filter.date.tolist(),
       y = data_filter.attendance_rate.tolist(),
       mode = 'lines',
       name = 'Taux de présence',
       line=dict(color="#548CA8")
-      )
-  )
-
-  att_layout = dict(title = "Evolution des taux de présence",
-                  xaxis = dict(title = 'Année', autotick=True),
-                  yaxis = dict(title = 'Taux de présence'),
-                  )
-
-  # global attendance graph
-  att_glob_graph = []
-  grouped_date = data_filter_date.groupby('date')['attendance_rate'].mean().reset_index()
-
-  att_glob_graph.append(go.Scatter(
+      ), 
+      go.Scatter(
       x = grouped_date.date.tolist(),
       y = grouped_date.attendance_rate.tolist(),
       mode = 'lines',
       name = 'Taux de présence global',
-      line=dict(color="#9960d6"))
-    )
+      line=dict(color="#9960d6")
+      )
+  ], 
+  layout = {
+        'title' : {'text': "Evolution des taux de présence globaux"},
+        'xaxis': {'title': 'Année'},
+        'yaxis': {'title': 'Taux de présence'}
+    }
+  )
   
-  att_glob_layout = dict(title = "Evolution des taux de présence globaux",
-                  xaxis = dict(title = 'Année', autotick=True),
-                  yaxis = dict(title = 'Taux de présence'),
-                  )
+  attendance_graph.update_layout(title_x=0.5, plot_bgcolor="rgb(230,230,250)")
   
   # attendance rate by district / real estate price
   grouped_district = data_filter_date.groupby('quartier_detail')['attendance_rate'].mean().reset_index()
@@ -98,8 +92,7 @@ def geo_figures(canteen, start_date, end_date):
 
   # append all charts
   figures = []
-  figures.append(dict(data=att_graph, layout=att_layout))
-  figures.append(dict(data=att_glob_graph, layout=att_glob_layout))
+  figures.append(attendance_graph)
   figures.append(district_graph)
 
 
