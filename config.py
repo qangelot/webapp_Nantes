@@ -17,7 +17,6 @@ class Config:
 
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
 
     MAIL_SERVER = "smtp.gmail.com"
     MAIL_PORT = 465
@@ -35,13 +34,14 @@ class Config:
 
 class ProdConfig(Config):
     FLASK_ENV = 'production'
+    SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
     DEBUG = False
     TESTING = False
-    # SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
 
 
 class DevConfig(Config):
     FLASK_ENV = 'development'
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
     DEBUG = True
     TESTING = False
     MAIL_SUPPRESS_SEND = True
@@ -49,6 +49,7 @@ class DevConfig(Config):
 
 class TestConfig(Config):
     FLASK_ENV = 'testing'
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
     DEBUG = True
     TESTING = True
     MAIL_SUPPRESS_SEND = True

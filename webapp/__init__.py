@@ -19,7 +19,7 @@ def create_app():
 
     app = Flask(__name__, instance_relative_config=False)
     # Configure the flask app instance
-    app.config.from_object('config.DevConfig')
+    app.config.from_object('config.ProdConfig')
 
     # Initialize Plugins
     db.init_app(app)
@@ -45,8 +45,9 @@ def create_app():
         # Register error handlers
         register_error_handlers(app)
 
-        # Create Database Models
-        db.create_all()
+        # Create Database Models (run this for the first time)
+        # to migrate db in production, use flask-migrate
+        # db.create_all()
 
         return app
 

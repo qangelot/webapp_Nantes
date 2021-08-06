@@ -1,4 +1,3 @@
-from os import EX_PROTOCOL
 from webapp import create_app
 
 

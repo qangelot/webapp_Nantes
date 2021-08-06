@@ -1,0 +1,199 @@
+2021-07-28 16:26:40,356 INFO: Création d'un nouvel utilisateur réussie. [in routes.py: 135]
+2021-07-28 16:26:54,310 INFO: Demande d'informations sur la cantine AMPERE [in bi_routes.py: 31]
+2021-08-05 12:07:05,928 INFO: Connexion réussie. [in routes.py: 34]
+2021-08-05 12:07:46,418 INFO: Création d'un nouvel utilisateur réussie. [in routes.py: 135]
+2021-08-05 13:56:41,725 ERROR: Exception on /predict [GET] [in app.py: 1454]
+Traceback (most recent call last):
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 756, in _write_bytes
+    self._sock.sendall(data)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 814, in _execute_command
+    self._write_bytes(packet)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 759, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (ConnectionResetError(104, 'Connection reset by peer'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask_login/utils.py", line 270, in decorated_view
+    elif not current_user.is_authenticated:
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/werkzeug/local.py", line 422, in __get__
+    obj = instance._get_current_object()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/werkzeug/local.py", line 544, in _get_current_object
+    return self.__local()  # type: ignore
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask_login/utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask_login/login_manager.py", line 318, in _load_user
+    user = self._user_callback(user_id)
+  File "/home/quentin/Desktop/webapp_Nantes/webapp/home/routes.py", line 149, in load_user
+    return User.query.get(user_id)
+  File "<string>", line 2, in get
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/util/deprecations.py", line 390, in warned
+    return fn(*args, **kwargs)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 942, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 946, in _get_impl
+    return self.session._get_impl(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2839, in _get_impl
+    return db_load_fn(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 531, in load_on_pk_identity
+    session.execute(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1583, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 323, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1452, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 814, in _execute_command
+    self._write_bytes(packet)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 759, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (ConnectionResetError(104, 'Connection reset by peer'))")
+[SQL: SELECT myusers.id AS myusers_id, myusers.name AS myusers_name, myusers.email AS myusers_email, myusers.password AS myusers_password, myusers.created_on AS myusers_created_on, myusers.last_login AS myusers_last_login 
+FROM myusers 
+WHERE myusers.id = %(pk_1)s]
+[parameters: {'pk_1': '6'}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-08-05 13:56:54,796 INFO: Connexion réussie. [in routes.py: 34]
+2021-08-05 13:57:09,939 INFO: Réalisation d'une prédiction par lots sur les inputs suivant : {'inputs': [{'date': '2018-09-03 00:00:00', 'prevision': 190, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 1, 'depuis_ferie': 19, 'depuis_juives': 43, 'ramadan_dans': 245, 'depuis_ramadan': 81}, {'date': '2018-09-04 00:00:00', 'prevision': 182, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 2, 'depuis_ferie': 20, 'depuis_juives': 44, 'ramadan_dans': 244, 'depuis_ramadan': 82}, {'date': '2018-09-05 00:00:00', 'prevision': 187, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 3, 'depuis_ferie': 21, 'depuis_juives': 45, 'ramadan_dans': 243, 'depuis_ramadan': 83}, {'date': '2018-09-06 00:00:00', 'prevision': 198, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 4, 'depuis_ferie': 22, 'depuis_juives': 46, 'ramadan_dans': 242, 'depuis_ramadan': 84}, {'date': '2018-09-07 00:00:00', 'prevision': 172, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 5, 'depuis_ferie': 23, 'depuis_juives': 47, 'ramadan_dans': 241, 'depuis_ramadan': 85}, {'date': '2018-09-08 00:00:00', 'prevision': 163, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 6, 'depuis_ferie': 24, 'depuis_juives': 48, 'ramadan_dans': 240, 'depuis_ramadan': 86}, {'date': '2018-09-09 00:00:00', 'prevision': 195, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 7, 'depuis_ferie': 25, 'depuis_juives': 49, 'ramadan_dans': 239, 'depuis_ramadan': 87}, {'date': '2018-09-10 00:00:00', 'prevision': 182, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 8, 'depuis_ferie': 26, 'depuis_juives': 50, 'ramadan_dans': 238, 'depuis_ramadan': 88}, {'date': '2018-09-11 00:00:00', 'prevision': 179, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 9, 'depuis_ferie': 27, 'depuis_juives': 51, 'ramadan_dans': 237, 'depuis_ramadan': 89}, {'date': '2018-09-12 00:00:00', 'prevision': 172, 'cantine_nom': 'MAISDON PAJOT', 'annee_scolaire': '2018-2019', 'effectif': 201, 'quartier_detail': 'Zola', 'prix_quartier_detail_m2_appart': 3424.0, 'prix_moyen_m2_appartement': 3553.0, 'prix_moyen_m2_maison': 4490.0, 'longitude': 1.5848, 'latitude': 47.2183, 'depuis_vacances': 10, 'depuis_ferie': 28, 'depuis_juives': 52, 'ramadan_dans': 236, 'depuis_ramadan': 90}]} [in predict_routes.py: 119]
+2021-08-05 13:57:28,668 INFO: Résultats de la prédiction par lots : ['195.25', '187.41', '191.64', '205.00', '176.04', '163.95', '200.56', '184.31', '182.36', '175.06'] [in predict_routes.py: 134]
+2021-08-05 13:58:03,316 INFO: Connexion réussie. [in routes.py: 34]
+2021-08-05 16:36:13,134 INFO: Connexion réussie. [in routes.py: 34]
+2021-08-05 17:03:21,235 ERROR: Exception on / [GET] [in app.py: 1454]
+Traceback (most recent call last):
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 756, in _write_bytes
+    self._sock.sendall(data)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 814, in _execute_command
+    self._write_bytes(packet)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 759, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (ConnectionResetError(104, 'Connection reset by peer'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/quentin/Desktop/webapp_Nantes/webapp/home/routes.py", line 24, in home
+    if current_user.is_authenticated:
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/werkzeug/local.py", line 422, in __get__
+    obj = instance._get_current_object()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/werkzeug/local.py", line 544, in _get_current_object
+    return self.__local()  # type: ignore
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask_login/utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/flask_login/login_manager.py", line 318, in _load_user
+    user = self._user_callback(user_id)
+  File "/home/quentin/Desktop/webapp_Nantes/webapp/home/routes.py", line 149, in load_user
+    return User.query.get(user_id)
+  File "<string>", line 2, in get
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/util/deprecations.py", line 390, in warned
+    return fn(*args, **kwargs)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 942, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 946, in _get_impl
+    return self.session._get_impl(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2839, in _get_impl
+    return db_load_fn(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 531, in load_on_pk_identity
+    session.execute(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1583, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 323, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1452, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 814, in _execute_command
+    self._write_bytes(packet)
+  File "/home/quentin/Desktop/webapp_Nantes/venv/lib/python3.8/site-packages/pymysql/connections.py", line 759, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (ConnectionResetError(104, 'Connection reset by peer'))")
+[SQL: SELECT myusers.id AS myusers_id, myusers.name AS myusers_name, myusers.email AS myusers_email, myusers.password AS myusers_password, myusers.created_on AS myusers_created_on, myusers.last_login AS myusers_last_login 
+FROM myusers 
+WHERE myusers.id = %(pk_1)s]
+[parameters: {'pk_1': '5'}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
