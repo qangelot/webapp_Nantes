@@ -6,18 +6,22 @@ from flask_wtf.csrf import CSRFProtect
 import logging
 from flask.logging import default_handler
 from logging.handlers import RotatingFileHandler
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+from applicationinsights.flask.ext import AppInsights
 
 
 # Instantiate plugins globally
 db = SQLAlchemy()
 maill = Mail()
 login_manager = LoginManager()
+appinsights = AppInsights()
 # crsf_protect = CSRFProtect()
 
 def create_app():
     """Initialize the core application."""
 
     app = Flask(__name__, instance_relative_config=False)
+
     # Configure the flask app instance
     app.config.from_object('config.ProdConfig')
 
@@ -25,6 +29,8 @@ def create_app():
     db.init_app(app)
     maill.init_app(app)
     login_manager.init_app(app)
+    app.config['APPINSIGHTS_INSTRUMENTATIONKEY'] = '9faab60d-278b-4ee6-a8cb-7d6c431e2eb1'
+    appinsights.init_app(app)
     # crsf_protect.init_app(app)
 
     with app.app_context():
@@ -41,6 +47,7 @@ def create_app():
         # Configure logging
         if app.config['FLASK_ENV'] == 'production':
             configure_logging(app)
+
 
         # Register error handlers
         register_error_handlers(app)
@@ -88,14 +95,17 @@ def configure_logging(app):
     app.logger.removeHandler(default_handler)
 
     # File handler : new file created when actual reach 20000 bytes / limit max log file to 20
-    file_handler = RotatingFileHandler('webapp.log', maxBytes=20000, backupCount=20)
+    # file_handler = RotatingFileHandler('webapp.log', maxBytes=20000, backupCount=20)
+
+    # Azure handler for Azure App Insights
+    az_handler = AzureLogHandler(connection_string='InstrumentationKey=9faab60d-278b-4ee6-a8cb-7d6c431e2eb1;IngestionEndpoint=https://westeurope-1.in.applicationinsights.azure.com/')
 
     # Create a file formatter and add it to the handler
     file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(filename)s: %(lineno)d]')
-    file_handler.setFormatter(file_formatter)
+    az_handler.setFormatter(file_formatter)
 
     # Add file handler object to the logger
-    app.logger.addHandler(file_handler)
+    app.logger.addHandler(az_handler)
     
     # Set the logging level
     app.logger.setLevel(logging.INFO)

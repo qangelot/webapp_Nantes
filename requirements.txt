@@ -17,3 +17,5 @@ Flask-Login
 pymysql
 Flask-Mail
 pytest
+opencensus-ext-azure
+applicationinsights

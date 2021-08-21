@@ -2,6 +2,13 @@
 
 The dashboard was made using boostrap, plotly and flask. The predictive tool is made using lightGBM library from Microsoft.
 
+## Architecture
+
+The web app is made of :
+- a dashboard displaying useful informations for canteen staff,
+- a predictive tool to make predictions about the attendance of the canteens in 2/3 week and beyond,
+- a contact page to give feedback about the app.
+
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install required libraries.
