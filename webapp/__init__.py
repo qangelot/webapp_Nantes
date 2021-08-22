@@ -12,7 +12,7 @@ from applicationinsights.flask.ext import AppInsights
 
 # Instantiate plugins globally
 db = SQLAlchemy()
-maill = Mail()
+mail = Mail()
 login_manager = LoginManager()
 appinsights = AppInsights()
 # crsf_protect = CSRFProtect()
@@ -22,14 +22,13 @@ def create_app():
 
     app = Flask(__name__, instance_relative_config=False)
 
-    # Configure the flask app instance
+    # Configure the flask app instance with the appropriate config
     app.config.from_object('config.ProdConfig')
 
     # Initialize Plugins
     db.init_app(app)
-    maill.init_app(app)
+    mail.init_app(app)
     login_manager.init_app(app)
-    app.config['APPINSIGHTS_INSTRUMENTATIONKEY'] = '9faab60d-278b-4ee6-a8cb-7d6c431e2eb1'
     appinsights.init_app(app)
     # crsf_protect.init_app(app)
 
@@ -97,8 +96,8 @@ def configure_logging(app):
     # File handler : new file created when actual reach 20000 bytes / limit max log file to 20
     # file_handler = RotatingFileHandler('webapp.log', maxBytes=20000, backupCount=20)
 
-    # Azure handler for Azure App Insights
-    az_handler = AzureLogHandler(connection_string='InstrumentationKey=9faab60d-278b-4ee6-a8cb-7d6c431e2eb1;IngestionEndpoint=https://westeurope-1.in.applicationinsights.azure.com/')
+    # Azure handler to log into Azure App Insights instead of text file
+    az_handler = AzureLogHandler(connection_string=app.config['APPINSIGHTS_CONNECTIONSTRING'])
 
     # Create a file formatter and add it to the handler
     file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(filename)s: %(lineno)d]')

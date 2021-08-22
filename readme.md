@@ -27,5 +27,12 @@ Open a terminal, and go into the app root directory.
 python wsgy.py
 ```
 
+## Config
+
+For dev and test config : using a local database and gmail SMTP server
+For prod config : using an azure database, azure emailing solution for contact form and app insights for logging
+
+Set environment variables accordingly.
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -9,7 +9,7 @@ current_user, login_user
 from flask_mail import Message
 from ..forms import ContactForm, SignupForm, LoginForm, DeleteUserForm
 from ..models import User
-from .. import db, login_manager, maill 
+from .. import db, login_manager, mail 
 from . import home_bp
 
 
@@ -87,16 +87,18 @@ def contact():
 
     form = ContactForm()
     if form.validate_on_submit():
+        # twilio sendgrid config for Azure
         msg = Message(f'Message from {form.name.data}', 
-        sender=app.config['MAIL_USERNAME'], 
-        recipients=[app.config['MAIL_USERNAME']])
+            sender=app.config['MAIL_USERNAME'], 
+            recipients=[app.config['MAIL_USERNAME']])
         msg.body = """
-        From: %s <%s>
-        --------------------------------------------------------------
-        %s
-        """ % (form.name.data, form.email.data, form.body.data)
-        maill.send(msg)
+            From: %s <%s>
+            --------------------------------------------------------------
+            %s
+            """ % (form.name.data, form.email.data, form.body.data)
+        mail.send(msg)
         app.logger.info("Formulaire de contact envoyé.")
+        flash(f'Le formulaire de contact a été correctement transmis.')
         return redirect(url_for('home_bp.home'))
 
     return render_template(

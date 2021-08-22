@@ -18,7 +18,7 @@ class Config:
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    MAIL_SERVER = "smtp.gmail.com"
+    MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USE_SSL = True
     MAIL_USERNAME = 'qadev54@gmail.com'
@@ -35,6 +35,14 @@ class Config:
 class ProdConfig(Config):
     FLASK_ENV = 'production'
     SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
+    MAIL_SERVER = 'smtp.sendgrid.net'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = 'apikey'
+    MAIL_PASSWORD = os.environ.get('SENDGRID_API_KEY')
+    MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
+    APPINSIGHTS_INSTRUMENTATIONKEY = environ.get('APPINSIGHTS_INSTRUMENTATIONKEY')
+    APPINSIGHTS_CONNECTIONSTRING = environ.get('APPINSIGHTS_CONNECTIONSTRING')
     DEBUG = False
     TESTING = False
 
