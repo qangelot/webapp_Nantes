@@ -29,8 +29,8 @@ python wsgy.py
 
 ## Config
 
-For dev and test config : using a local database and gmail SMTP server
-For prod config : using an azure database, azure emailing solution for contact form and app insights for logging
+- For dev and test config : using a local database and gmail SMTP server for contact form 
+- For prod config : using an azure database, twilio sendgrid SMTP server and app insights for logging
 
 Set environment variables accordingly.
 
