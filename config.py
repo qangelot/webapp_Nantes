@@ -21,7 +21,7 @@ class Config:
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USE_SSL = True
-    MAIL_USERNAME = 'qadev54@gmail.com'
+    MAIL_USERNAME = os.environ.get('MAIL_DEFAULT_SENDER')
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
     MAIL_SUPPRESS_SEND = False
 
