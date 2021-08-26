@@ -27,6 +27,14 @@ Open a terminal, and go into the app root directory.
 python wsgy.py
 ```
 
+### Test the app
+
+```bash
+source venv/bin/activate
+cd tests/
+pytest
+```
+
 ## Config
 
 - For dev and test config : using a local database and gmail SMTP server for contact form 
